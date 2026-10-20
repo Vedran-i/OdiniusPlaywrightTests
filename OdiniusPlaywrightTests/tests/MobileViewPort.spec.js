@@ -1,31 +1,43 @@
 
-import { test, expect, devices } from '@playwright/test';
+const { test, expect, devices } = require('@playwright/test');
+const { HomePage } = require('../pages/HomePage');
 
 test.describe('Playwright Viewport Scenario', () => {
 
-    test('Test Case 01 - iPhone 17 Pro Max', async ({ page }) => {
+    test('Test Case 01 - iPhone 17 Pro Max', async ({ browser }) => {
+
+        // Get the iPhone device settings
         const iPhone17 = devices['iPhone 17 Pro Max'];
 
-        await page.setViewportSize(iPhone17.viewport);
+        // Create a browser context using those settings
+        const context = await browser.newContext(iPhone17);
+        const page = await context.newPage();
 
-        await page.goto('https://odinius.nl/');
+        // Create the Page Object and open the homepage
+        const homePage = new HomePage(page);
+        await homePage.goto();
 
         // Verify that the homepage loads
         await expect(page).toHaveTitle(/ODINIUS/i);
 
         // Verify that the main section is visible
         await expect(
-            page.getByRole('heading', { name: 'De Band', exact: true })
+            page.getByRole('heading', {
+                name: 'De Band',
+                exact: true
+            })
         ).toBeVisible();
 
         // Verify the viewport dimensions
         expect(page.viewportSize()).toEqual(iPhone17.viewport);
+
+        await context.close();
     });
 
 
     test('Test Case 02 - Samsung Galaxy S20', async ({ browser }) => {
 
-        // Define a custom Samsung Galaxy S20 configuration
+        // Define custom Samsung Galaxy S20 settings
         const samsungS20 = {
             viewport: { width: 360, height: 800 },
             deviceScaleFactor: 3,
@@ -39,17 +51,22 @@ test.describe('Playwright Viewport Scenario', () => {
         const context = await browser.newContext(samsungS20);
         const page = await context.newPage();
 
-        await page.goto('https://odinius.nl/');
+        // Create the Page Object and open the homepage
+        const homePage = new HomePage(page);
+        await homePage.goto();
 
-        // Verify the homepage loads
+        // Verify that the homepage loads
         await expect(page).toHaveTitle(/ODINIUS/i);
 
-        // Verify the main section is visible
+        // Verify that the main section is visible
         await expect(
-            page.getByRole('heading', { name: 'De Band', exact: true })
+            page.getByRole('heading', {
+                name: 'De Band',
+                exact: true
+            })
         ).toBeVisible();
 
-        // Verify viewport dimensions
+        // Verify the viewport dimensions
         expect(page.viewportSize()).toEqual({
             width: 360,
             height: 800
@@ -59,7 +76,6 @@ test.describe('Playwright Viewport Scenario', () => {
     });
 
 });
-
 
 
 
