@@ -22,7 +22,7 @@ class HomePage extends BasePage {
     this.headings = {
       band: 'De Band',
       setlist: 'Setlist',
-      shows: 'Optredens',
+      shows: 'Optredens 2026',
       music: 'Muziek',
       reviews: 'Reviews',
       photos: "Foto's",
@@ -41,7 +41,7 @@ class HomePage extends BasePage {
     await expect(this.page.getByRole('link', { name: 'Over Ons', exact: true }).first()).toBeVisible();
     await expect(this.page.getByRole('heading', { name: 'De Band', exact: true })).toBeVisible();
     await expect(this.page.getByRole('heading', { name: 'Setlist', exact: true })).toBeVisible();
-    await expect(this.page.getByRole('heading', { name: /^Optredens(?: \d{4})?$/ })).toBeVisible();
+    await expect(this.page.getByRole('heading', { name: 'Optredens 2026', exact: true })).toBeVisible();
     await expect(this.page.getByRole('heading', { name: 'Muziek', exact: true })).toBeVisible();
     await expect(this.page.getByRole('heading', { name: 'Reviews', exact: true })).toBeVisible();
     await expect(this.page.getByRole('heading', { name: 'Boek Ons!', exact: true })).toBeVisible();
