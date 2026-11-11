@@ -1,26 +1,21 @@
-Odinius – Playwright Automation Tests
+**Odinius – Playwright Automation Tests**
 
-About the Project
+**About the Project**
 
 This project is an end-to-end test automation framework built with Playwright and JavaScript to test the Odinius website.
-
 The goal is to practice and demonstrate UI test automation, applying the Page Object Model (POM) design pattern and implementing automated test execution through GitHub Actions.
 
-Technologies Used
+
+**Technologies Used:**
 
 JavaScript – Programming language
-
 Playwright – Browser automation and end-to-end testing
-
 Node.js & npm – Runtime and package management
-
 Page Object Model (POM) – Test framework design pattern
-
 Git & GitHub – Version control and source code management
-
 GitHub Actions – CI automation and scheduled test execution
 
-Test Coverage
+**Test Coverage**
 
 The current test suite includes checks for:
 
