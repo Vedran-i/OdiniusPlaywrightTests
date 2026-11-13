@@ -1,32 +1,54 @@
-**Odinius – Playwright Automation Tests**
+# Odinius Playwright POM tests
 
-**About the Project**
+End-to-end tests for https://odinius.nl/, built with Playwright and JavaScript using the Page Object Model (POM). GitHub Actions runs the suite on pushes and pull requests to `main`, and on a daily schedule.
 
-This project is an end-to-end test automation framework built with Playwright and JavaScript to test the Odinius website.
-The goal is to practice and demonstrate UI test automation, applying the Page Object Model (POM) design pattern and implementing automated test execution through GitHub Actions.
+## Requirements
 
+- Node.js (current LTS recommended)
+- Visual Studio Code
 
-**Technologies Used:**
+## Setup in VS Code
 
-JavaScript – Programming language
-Playwright – Browser automation and end-to-end testing
-Node.js & npm – Runtime and package management
-Page Object Model (POM) – Test framework design pattern
-Git & GitHub – Version control and source code management
-GitHub Actions – CI automation and scheduled test execution
+Open this project folder in VS Code, then open **Terminal → New Terminal** and run:
 
-**Test Coverage**
+```bash
+npm install
+npx playwright install
+```
 
-The current test suite includes checks for:
+## Run the tests
 
-Homepage loading and page title
+```bash
+npm test
+```
 
-Homepage content and visibility of key elements
+Run with a visible browser:
 
-Navigation and links
+```bash
+npm run test:headed
+```
 
-External video links (YouTube)
+Open Playwright's HTML report after a run:
 
-Responsive behaviour and mobile viewport testing
+```bash
+npm run test:report
+```
 
-The test suite will be expanded as the project develops.
+## Project structure
+
+- `pages/BasePage.js`: shared page functionality
+- `pages/HomePage.js`: locators and actions for the Odinius homepage
+- `tests/homepage.spec.js`: homepage smoke tests
+- `tests/navigation.spec.js`: navigation checks
+- `playwright.config.js`: browser and reporting configuration
+- `.github/workflows/playwright.yml`: GitHub Actions workflow
+
+## Test coverage
+
+The suite checks homepage loading and content, navigation and links, external YouTube links, and responsive mobile layouts. The tests do not submit forms or click external booking or social links.
+
+## Important notes
+
+The live site is a single-page band website. The navigation checks verify that the menu links are visible and have targets. For in-page links, they also verify that the referenced anchor exists. This does not yet prove every link scrolls correctly or that every external destination is healthy.
+
+Before relying on this in CI, run the suite locally and adjust selectors if the website changes. Prefer accessible locators such as `getByRole` and `getByText`; avoid brittle CSS classes where possible.
